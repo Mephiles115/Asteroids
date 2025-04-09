@@ -29,3 +29,15 @@ class CircleShape(pygame.sprite.Sprite):
 
     def distance_to(self, other):
         return self.position.distance_to(other.position)
+
+
+class Shot(CircleShape):
+    def __init__ (self, radius, position, velocity):
+        super().__init__(position.x, position.y, radius)
+        self.velocity = velocity
+
+    def draw(self, screen):
+        pygame.draw.circle(screen, (255, 255, 255), self.position, self.radius, 2)
+
+    def update(self, dt):
+        self.position += self.velocity * dt
