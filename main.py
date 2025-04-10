@@ -34,12 +34,19 @@ def main():
         screen.fill((0,0,0))
 
         dt = clock.tick(60) / 1000
+        field.update(dt)
         updatable.update(dt)
+
         for asteroid in asteroids:
             if asteroid.collision(player):
                 print("Game over!")
                 exit()
-        field.update(dt)
+
+            for shot in shots:
+                if asteroid.collision(shot):
+                    asteroid.split()
+                    shot.kill()
+
         for thing in drawable:
             thing.draw(screen)
 
